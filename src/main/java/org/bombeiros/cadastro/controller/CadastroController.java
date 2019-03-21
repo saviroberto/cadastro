@@ -7,6 +7,7 @@ import org.bombeiros.cadastro.service.CadastroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,13 @@ public class CadastroController {
 		cadastroService.cadastrarPessoasParaTeste();
 		List<Pessoa> pessoas = cadastroService.listarTodasAsPessoas();
 		ResponseEntity<List<Pessoa>> response = new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
+		return response;
+	}
+	
+	@RequestMapping(path = "pessoa", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> cadastrarPessoa(@RequestBody String pessoa) {
+		System.out.println(pessoa);
+		ResponseEntity<String> response = new ResponseEntity<String>("BOA", HttpStatus.OK);
 		return response;
 	}
 }
