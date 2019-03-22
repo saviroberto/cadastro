@@ -1,6 +1,7 @@
 package org.bombeiros.cadastro.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bombeiros.cadastro.model.Pessoa;
 import org.bombeiros.cadastro.repository.PessoasRepository;
@@ -21,10 +22,25 @@ public class CadastroService {
 	public void cadastrarPessoasParaTeste() {
 		for (int i = 0; i < 100; i++) {
 			Pessoa pessoa = new Pessoa();
-			pessoa.setId(Long.valueOf(i));
 			pessoa.setNome("Nome" + i);
 			pessoasRepository.save(pessoa);
 		}
 	}
 
+	public void salvarPessoa(Pessoa pessoa) {
+		pessoasRepository.save(pessoa);
+	}
+
+	public List<Pessoa> procurarPessoaPorNome(String nome) {
+		return pessoasRepository.findByNomeContainingIgnoreCase(nome);
+	}
+
+	public Pessoa procurarPessoaPorId(String id) {
+		Optional<Pessoa> optionalPessoa = pessoasRepository.findById(Long.valueOf(id));
+		if (optionalPessoa.isPresent()) {
+			return optionalPessoa.get();
+		} else {
+			return new Pessoa();
+		}
+	}
 }
