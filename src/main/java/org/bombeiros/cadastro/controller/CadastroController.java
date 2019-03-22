@@ -29,9 +29,9 @@ public class CadastroController {
 	}
 	
 	@RequestMapping(path = "pessoa", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> cadastrarPessoa(@RequestBody String pessoa) {
+	public ResponseEntity<Pessoa> cadastrarPessoa(@RequestBody Pessoa pessoa) {
 		System.out.println(pessoa);
-		ResponseEntity<String> response = new ResponseEntity<String>("BOA", HttpStatus.OK);
+		ResponseEntity<Pessoa> response = new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
 		return response;
 	}
 }
